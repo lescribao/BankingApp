@@ -26,9 +26,10 @@ public class ThirdPartyController {
     @ResponseStatus(HttpStatus.OK)
     public void thirdPartySendMoney(@RequestHeader("hashedKey") String hashedKey ,
                                     @RequestHeader("amount") BigDecimal amount,
-                                    @RequestHeader("accountId") String accountId) {
+                                    @RequestHeader("accountId") Long accountId,
+                                    @RequestHeader("secretKey") String secretKey) {
 
-        thirdPartyService.sendMoney(hashedKey, amount, accountId);
+        thirdPartyService.sendMoney(hashedKey, amount, accountId, secretKey);
 
     }
 }
