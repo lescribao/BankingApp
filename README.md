@@ -73,9 +73,9 @@ Once an account is created, if the account holder is under 24, it will be create
 POST route:
 <h3>/create/{accountType}/{id}</h3>
 This route can only be used by an Admin, and it has two PathVariables, the first is used to determine if the account being created will be credit, savings, or checking (or student, which will be created automatically if the owner of the account is under 24 years old.
-If the first pathvariable is not valid, a <h2>BAD_REQUEST</h2> will be thrown, indicating that it's not a valid account type.
+If the first pathvariable is not valid, a BAD_REQUEST will be thrown, indicating that it's not a valid account type.
 The admin will also need to provide a DTO with the information of the account itself, aswell as the id of the AccountHolder.
-If the ID introduced doesn't match any of the accounts in the database, a <h2>NOT_FOUND</h2> HTTPStatus exception will be thrown.
+If the ID introduced doesn't match any of the accounts in the database, a NOT_FOUND HTTPStatus exception will be thrown.
 An error will also be thrown if a @NotNull parameter is not filled properly in the JSON with the DTO information.
 
 
@@ -83,31 +83,31 @@ DELETE route:
 <h3>/delete/account</h3>
 This route can only be used by an Admin, and it simply requires the ID of an account in order to delete it.
 If the ID is found, the Account will be deleted and cascade will prevent issues.
-If the ID is not found in the DB, a <h2>NOT_FOUND</h2> exception will be thrown.
+If the ID is not found in the DB, a NOT_FOUND exception will be thrown.
 
 
 GET route:
 <h3>/accounts/</h3>
 This route is used by any account holder, and it's used to display all accounts under their user, regardless of if they are primary or secondary owners of it, and returns a list of said Accounts.
-If the username introduced with the Basic Auth doesn't match any accountHolders in our systems a <h2>NOT_FOUND</h2> HTTPStatus will be thrown.
+If the username introduced with the Basic Auth doesn't match any accountHolders in our systems a >NOT_FOUND HTTPStatus will be thrown.
 
 GET route:
 <h3>/account/{id}</h3>
 This route can be used by any AccountHolder, but it will only display the account if the accountOwner of the Account found with findById matches the one using it's username and password to log-in.
-If the username is valid and it's an AccountHolder registered in our DB, but the ID doesn't match any of the accounts in our systems, a <h2>NOT_FOUND</h2> HTTPStatus exception will be thrown.
-If the username introduced doesn't match any of the accountholders in our systems, a <h2>NOT_FOUND</h2> HTTPStatus exception will be thrown.
+If the username is valid and it's an AccountHolder registered in our DB, but the ID doesn't match any of the accounts in our systems, a NOT_FOUND HTTPStatus exception will be thrown.
+If the username introduced doesn't match any of the accountholders in our systems, a NOT_FOUND HTTPStatus exception will be thrown.
 
 PATCH route: 
 <h3>/modifyBalance/{amount}</h3>
 This route can only be used by Admins, and it's used to modify the balance of an existing account, regardless of what type.
 It has a pathvariable with the amount to update the account with, and it has a RequestParam with the id of the Account.
-If the ID introduced doesn't match any of the existing accounts in the DB. A <h2>NOT_FOUND</h2> HTTPStatus exception will be thrown.
+If the ID introduced doesn't match any of the existing accounts in the DB. A NOT_FOUND HTTPStatus exception will be thrown.
 
 PATCH route:
 <h3>/FreezeAccount/</h3>
 This route can only be used by Admins, It takes an ID of an account as RequestParam.
-Can't be applied to CreditCard accounts. Which would throw a <h2>BAD_REQUEST</h2> HTTPStatus exception.
-It will also throw a <h2>NOT_FOUND</h2> HTTPStatus exception if the account was not found with findById
+Can't be applied to CreditCard accounts. Which would throw a BAD_REQUEST HTTPStatus exception.
+It will also throw a NOT_FOUND HTTPStatus exception if the account was not found with findById
 
 POST route:
 <h3>/newThirdParty/</h3>
@@ -117,5 +117,13 @@ GET route:
 <h3>/ThirdParty/send/</h3>
 This method can only be used by Users with the ThirdParty ROLE, and it requires to introduce a Header with the third Party's SecretKey, the amount being sent, and the ID and secretKey of the account they are sending the money to.
 Since the third party is not part of our bank, we assume they have enough balance, and all transations are done in EURO.
-If the secretKey doesn't match with the one of the Account with the given IP, a <h2> BAD_REQUEST</h2> HTTPStatus will be thrown.
-If the ID provided doesn't match any of the ones in the Account DB, a <h2>NOT_FOUND</h2> HTTPStatus will be thrown.
+If the secretKey doesn't match with the one of the Account with the given IP, a  BAD_REQUEST HTTPStatus will be thrown.
+If the ID provided doesn't match any of the ones in the Account DB, a NOT_FOUND HTTPStatus will be thrown.
+
+
+<h2> USE case Diagram and CLASS Diagram</h2>
+
+![image](https://user-images.githubusercontent.com/110464615/188334579-d3148a60-bafb-4385-b596-249ce810a05d.png)
+
+
+<h3> Use Case </h3> 
