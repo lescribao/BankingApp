@@ -45,7 +45,7 @@ public class AccountHolderService {
 
             //get the _sender's_ information to find him through the basic auth
 
-            Account senderAccount; //youknowwhat
+            Account senderAccount = new CheckingAccount(); //youknowwhat
 
             receiverHolder = receiverAccount.getPrimaryOwner();
 

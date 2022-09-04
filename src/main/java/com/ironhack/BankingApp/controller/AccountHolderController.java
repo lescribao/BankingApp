@@ -17,7 +17,7 @@ public class AccountHolderController {
     @Autowired
     AccountHolderService accountHolderService;
 
-    @PostMapping("/accounts/")
+    @GetMapping("/accounts/")
     @ResponseStatus(HttpStatus.OK)
     public List<Account> checkAccounts(String id/* @AuthenticationPrincipal userdetails.username */) {
 
@@ -27,7 +27,7 @@ public class AccountHolderController {
         return accountHolderService.checkAccounts(id);
     }
 
-    @PostMapping("/account/{id}")
+    @GetMapping("/account/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Account checkAccountById(@PathVariable Long id /*, @AuthenticationPrincipal userdetails.username */) {
 

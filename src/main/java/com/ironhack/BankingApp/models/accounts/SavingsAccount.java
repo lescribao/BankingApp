@@ -30,6 +30,10 @@ public class SavingsAccount extends Account{
     private BigDecimal interestRate = new BigDecimal(0.0025, new MathContext(4));
 
     @Column(precision = 19, scale = 4)
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "MINIMUM_AMOUNT")),
+            @AttributeOverride(name = "currency", column = @Column(name = "MINIMUM_CURRENCY"))
+    })
     private Money minimumBalance = new Money(Currency.EURO, BigDecimal.valueOf(1000.00));
 
 

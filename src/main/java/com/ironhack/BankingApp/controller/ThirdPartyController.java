@@ -22,7 +22,7 @@ public class ThirdPartyController {
 
     }
 
-    @PostMapping("/ThirdParty/send/")
+    @GetMapping("/ThirdParty/send/")
     @ResponseStatus(HttpStatus.OK)
     public void thirdPartySendMoney(@RequestHeader("hashedKey") String hashedKey ,
                                     @RequestHeader("amount") BigDecimal amount,
@@ -32,4 +32,5 @@ public class ThirdPartyController {
         thirdPartyService.sendMoney(hashedKey, amount, accountId, secretKey);
 
     }
+
 }
