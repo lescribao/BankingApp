@@ -127,3 +127,5 @@ If the ID provided doesn't match any of the ones in the Account DB, a NOT_FOUND 
 
 
 <h3> Use Case </h3> 
+
+![image](https://user-images.githubusercontent.com/110464615/188334850-a9f82ff7-44c6-46af-ba86-65e591e6e062.png)
