@@ -1,30 +1,18 @@
 package com.ironhack.BankingApp;
 
-import ch.qos.logback.classic.pattern.LineOfCallerConverter;
-import com.ironhack.BankingApp.models.accounts.Account;
-import com.ironhack.BankingApp.models.accounts.CheckingAccount;
-import com.ironhack.BankingApp.models.accounts.enums.Status;
-import com.ironhack.BankingApp.models.users.*;
-import com.ironhack.BankingApp.models.utilities.Address;
-import com.ironhack.BankingApp.models.utilities.Money;
-import com.ironhack.BankingApp.models.utilities.enums.Currency;
+
 import com.ironhack.BankingApp.repositories.ThirdPartyRepository;
 import com.ironhack.BankingApp.repositories.users.AccountHolderRepository;
 import com.ironhack.BankingApp.repositories.users.AdminRepository;
 import com.ironhack.BankingApp.repositories.users.RoleRepository;
-import net.bytebuddy.asm.Advice;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
 
 @SpringBootApplication
 public class BankingAppApplication implements CommandLineRunner  {

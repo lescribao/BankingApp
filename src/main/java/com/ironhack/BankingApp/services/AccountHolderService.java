@@ -113,179 +113,188 @@ public class AccountHolderService {
 
     }
 
-    public Account checkAccountById(Long id) {
-        AccountHolder accountHolder = new AccountHolder(); // = accountHolderRepository.findById().get();
+    public Account checkAccountById(Long id, String username) {
+        if (accountHolderRepository.findById(username).isPresent()) {
 
-        for (int i = 0; i < accountHolder.getPrimaryAccountList().size(); i++) {
-            if (accountRepository.findById(id).equals(accountHolder.getPrimaryAccountList().get(i))) {
-                if (accountHolder.getPrimaryAccountList().get(i).getClass() == CheckingAccount.class) {
-
-                    CheckingAccount account = (CheckingAccount) accountHolder.getPrimaryAccountList().get(i);
-
-                    account.applyMonthlyMaintFee();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else if (accountHolder.getPrimaryAccountList().get(i).getClass() == SavingsAccount.class) {
-
-                    SavingsAccount account = (SavingsAccount) accountHolder.getPrimaryAccountList().get(i);
-
-                    account.addInterestRate();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else if (accountHolder.getPrimaryAccountList().get(i).getClass() == CreditCard.class) {
-
-                    CreditCard account = (CreditCard) accountHolder.getPrimaryAccountList().get(i);
-
-                    account.addInterestRate();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else {
-
-                    return accountHolder.getPrimaryAccountList().get(i);
-
-                }
-            }
-        }
-        for (int j = 0; j < accountHolder.getSndAccountList().size(); j++) {
-            if (accountRepository.findById(id).equals(accountHolder.getSndAccountList().get(j))) {
-                if (accountHolder.getSndAccountList().get(j).getClass() == CheckingAccount.class) {
-
-                    CheckingAccount account = (CheckingAccount) accountHolder.getSndAccountList().get(j);
-
-                    account.applyMonthlyMaintFee();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else if (accountHolder.getSndAccountList().get(j).getClass() == SavingsAccount.class) {
-
-                    SavingsAccount account = (SavingsAccount) accountHolder.getSndAccountList().get(j);
-
-                    account.addInterestRate();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else if (accountHolder.getSndAccountList().get(j).getClass() == CreditCard.class) {
-
-                    CreditCard account = (CreditCard) accountHolder.getSndAccountList().get(j);
-
-                    account.addInterestRate();
-                    accountRepository.save(account);
-
-                    return account;
-
-                }
-                else {
-
-                    return accountHolder.getSndAccountList().get(j);
-
-                }
-            }
-
-        }
-
-        return null;
-    }
-
-    public List<Account> checkAccounts(String id) {
-
-        // if (accountHolderRepository.findById().isPresent()) {
-
-            List<Account> accountList = new ArrayList<>();
-
-            AccountHolder accountHolder = new AccountHolder(); //accountHolderRepository.findById().get();
-
+            AccountHolder accountHolder = accountHolderRepository.findById(username).get();
 
             for (int i = 0; i < accountHolder.getPrimaryAccountList().size(); i++) {
-                if (accountHolder.getPrimaryAccountList().get(i).getClass() == CheckingAccount.class) {
+                if (accountRepository.findById(id).equals(accountHolder.getPrimaryAccountList().get(i))) {
+                    if (accountHolder.getPrimaryAccountList().get(i).getClass() == CheckingAccount.class) {
 
-                    CheckingAccount account = (CheckingAccount) accountHolder.getPrimaryAccountList().get(i);
+                        CheckingAccount account = (CheckingAccount) accountHolder.getPrimaryAccountList().get(i);
 
-                    account.applyMonthlyMaintFee();
-                    accountRepository.save(account);
+                        account.applyMonthlyMaintFee();
+                        accountRepository.save(account);
 
-                    accountList.add(account);
+                        return account;
 
+                    }
+                    else if (accountHolder.getPrimaryAccountList().get(i).getClass() == SavingsAccount.class) {
+
+                        SavingsAccount account = (SavingsAccount) accountHolder.getPrimaryAccountList().get(i);
+
+                        account.addInterestRate();
+                        accountRepository.save(account);
+
+                        return account;
+
+                    }
+                    else if (accountHolder.getPrimaryAccountList().get(i).getClass() == CreditCard.class) {
+
+                        CreditCard account = (CreditCard) accountHolder.getPrimaryAccountList().get(i);
+
+                        account.addInterestRate();
+                        accountRepository.save(account);
+
+                        return account;
+
+                    }
+                    else {
+
+                        return accountHolder.getPrimaryAccountList().get(i);
+
+                    }
                 }
-                else if (accountHolder.getPrimaryAccountList().get(i).getClass() == SavingsAccount.class) {
+            }
+            for (int j = 0; j < accountHolder.getSndAccountList().size(); j++) {
+                if (accountRepository.findById(id).equals(accountHolder.getSndAccountList().get(j))) {
+                    if (accountHolder.getSndAccountList().get(j).getClass() == CheckingAccount.class) {
 
-                    SavingsAccount account = (SavingsAccount) accountHolder.getPrimaryAccountList().get(i);
+                        CheckingAccount account = (CheckingAccount) accountHolder.getSndAccountList().get(j);
 
-                    account.addInterestRate();
-                    accountRepository.save(account);
+                        account.applyMonthlyMaintFee();
+                        accountRepository.save(account);
 
-                    accountList.add(account);
+                        return account;
 
-                }
-                else if (accountHolder.getPrimaryAccountList().get(i).getClass() == CreditCard.class) {
+                    }
+                    else if (accountHolder.getSndAccountList().get(j).getClass() == SavingsAccount.class) {
 
-                    CreditCard account = (CreditCard) accountHolder.getPrimaryAccountList().get(i);
+                        SavingsAccount account = (SavingsAccount) accountHolder.getSndAccountList().get(j);
 
-                    account.addInterestRate();
-                    accountRepository.save(account);
+                        account.addInterestRate();
+                        accountRepository.save(account);
 
-                    accountList.add(account);
+                        return account;
 
-                }
-                else {
+                    }
+                    else if (accountHolder.getSndAccountList().get(j).getClass() == CreditCard.class) {
 
+                        CreditCard account = (CreditCard) accountHolder.getSndAccountList().get(j);
 
+                        account.addInterestRate();
+                        accountRepository.save(account);
 
+                        return account;
+
+                    }
+                    else {
+
+                        return accountHolder.getSndAccountList().get(j);
+
+                    }
                 }
             }
 
-            for (int i = 0; i < accountHolder.getSndAccountList().size(); i++) {
-                if (accountHolder.getSndAccountList().get(i).getClass() == CheckingAccount.class) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The ID introduced doesn't match any of the banking accounts" +
+                    "to your name");
 
-                    CheckingAccount account = (CheckingAccount) accountHolder.getSndAccountList().get(i);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The username used to log-in doesn't match the any AccountHolders in our database.");
+        }
 
-                    account.applyMonthlyMaintFee();
-                    accountRepository.save(account);
 
-                    accountList.add(account);
+    }
 
-                }
-                else if (accountHolder.getSndAccountList().get(i).getClass() == SavingsAccount.class) {
+    public List<Account> checkAccounts(String username) {
 
-                    SavingsAccount account = (SavingsAccount) accountHolder.getSndAccountList().get(i);
+       if (accountHolderRepository.findById(username).isPresent()) {
 
-                    account.addInterestRate();
-                    accountRepository.save(account);
+           List<Account> accountList = new ArrayList<>();
 
-                    accountList.add(account);
+           AccountHolder accountHolder = new AccountHolder(); //accountHolderRepository.findById().get();
 
-                }
-                else if (accountHolder.getSndAccountList().get(i).getClass() == CreditCard.class) {
 
-                    CreditCard account = (CreditCard) accountHolder.getSndAccountList().get(i);
+           for (int i = 0; i < accountHolder.getPrimaryAccountList().size(); i++) {
+               if (accountHolder.getPrimaryAccountList().get(i).getClass() == CheckingAccount.class) {
 
-                    account.addInterestRate();
-                    accountRepository.save(account);
+                   CheckingAccount account = (CheckingAccount) accountHolder.getPrimaryAccountList().get(i);
 
-                    accountList.add(account);
+                   account.applyMonthlyMaintFee();
+                   accountRepository.save(account);
 
-                }
-                else {
+                   accountList.add(account);
 
-                }
-            }
+               }
+               else if (accountHolder.getPrimaryAccountList().get(i).getClass() == SavingsAccount.class) {
 
-            return accountList;
-        //} else {
-        //    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The username introduced doesn't match any accounts");
-        //}
+                   SavingsAccount account = (SavingsAccount) accountHolder.getPrimaryAccountList().get(i);
+
+                   account.addInterestRate();
+                   accountRepository.save(account);
+
+                   accountList.add(account);
+
+               }
+               else if (accountHolder.getPrimaryAccountList().get(i).getClass() == CreditCard.class) {
+
+                   CreditCard account = (CreditCard) accountHolder.getPrimaryAccountList().get(i);
+
+                   account.addInterestRate();
+                   accountRepository.save(account);
+
+                   accountList.add(account);
+
+               }
+               else {
+
+
+
+               }
+           }
+
+           for (int i = 0; i < accountHolder.getSndAccountList().size(); i++) {
+               if (accountHolder.getSndAccountList().get(i).getClass() == CheckingAccount.class) {
+
+                   CheckingAccount account = (CheckingAccount) accountHolder.getSndAccountList().get(i);
+
+                   account.applyMonthlyMaintFee();
+                   accountRepository.save(account);
+
+                   accountList.add(account);
+
+               }
+               else if (accountHolder.getSndAccountList().get(i).getClass() == SavingsAccount.class) {
+
+                   SavingsAccount account = (SavingsAccount) accountHolder.getSndAccountList().get(i);
+
+                   account.addInterestRate();
+                   accountRepository.save(account);
+
+                   accountList.add(account);
+
+               }
+               else if (accountHolder.getSndAccountList().get(i).getClass() == CreditCard.class) {
+
+                   CreditCard account = (CreditCard) accountHolder.getSndAccountList().get(i);
+
+                   account.addInterestRate();
+                   accountRepository.save(account);
+
+                   accountList.add(account);
+
+               }
+               else {
+
+               }
+           }
+
+           return accountList;
+       }
+       else {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The username introduced doesn't match any accounts");
+        }
 
     }
 }

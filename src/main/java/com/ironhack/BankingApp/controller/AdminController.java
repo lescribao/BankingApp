@@ -24,5 +24,10 @@ public class AdminController {
 
     }
 
+    @PatchMapping("/FreezeAccount/")
+    @ResponseStatus(HttpStatus.OK)
+    public void freezeAccount(@RequestParam Long id) {
 
+        adminService.freezeAccount(id);
+    }
 }
