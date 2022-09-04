@@ -8,7 +8,7 @@ All Users have;
 A password. Which they will use to protect their account and so others can't access their account.
 
 
-Admin
+<h1>Admin</h1>
 
 All admins have the ability to delete accounts, modify values in the DB, and overall manage most of the inner works of the application.
 They only have the parameters of the abstract class User.
