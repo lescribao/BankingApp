@@ -40,7 +40,7 @@ public class SecurityConfiguration {
 
         httpSecurity.authorizeRequests()
                 .mvcMatchers(HttpMethod.POST, "/create/{accountType}/{id}").hasRole("ADMIN").
-                mvcMatchers(HttpMethod.DELETE, "delete/account").hasRole("ADMIN").
+                mvcMatchers(HttpMethod.DELETE, "/delete/account").hasRole("ADMIN").
                 mvcMatchers(HttpMethod.GET, "/accounts/").hasRole("ACCOUNT_HOLDER").
                 mvcMatchers(HttpMethod.GET, "/account/{id}").hasRole("ACCOUNT_HOLDER").
                 mvcMatchers(HttpMethod.PATCH, "/modifyBalance/{amount}").hasRole("ADMIN").
