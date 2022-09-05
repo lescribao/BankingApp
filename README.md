@@ -70,6 +70,13 @@ Once an account is created, if the account holder is under 24, it will be create
 
 <h1>Internal Functions</h1>
 
+GET route:
+<h3>/tranfer/{id}</h3>
+This method can be used by any AccountHolder, and it's used to transfer funds to another AccountHolder, in order to do so, they must provide the ID of the account via a @PathVariable, and provide the name (id) of the account holder to recieve it, and the amount to be transfered. 
+A NOT_FOUND exception will be thrown if the username used for basic auth doesnt match any of the ones in the DB, aswell as if the ID doesn't match any of the Accounts from that Account Holder.
+If the AccountHolder cannot be found, a NOT_FOUND HTTPStatus exception will be thrown, it will do so aswell if the account ID is not of the accountHolder introduced.
+It will also throw a BAD_REQUEST HTTPStatus if the account doesn't have enough funds. 
+
 POST route:
 <h3>/create/{accountType}/{id}</h3>
 This route can only be used by an Admin, and it has two PathVariables, the first is used to determine if the account being created will be credit, savings, or checking (or student, which will be created automatically if the owner of the account is under 24 years old.
